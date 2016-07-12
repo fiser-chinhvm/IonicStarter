@@ -1,6 +1,6 @@
 var app =  angular.module('starter.controllers', ['ionic','ngCordova','starter.services'])
 
-app.controller("DemoController", function($scope, $ionicHistory, $cordovaSQLite, Data){
+app.controller("DemoController", function($scope, $ionicHistory,$ionicPlatform, $cordovaSQLite, Data){
     console.log($ionicHistory);
     $scope.myGoBack = function() {
       $ionicHistory.goBack();
@@ -11,7 +11,7 @@ app.controller("DemoController", function($scope, $ionicHistory, $cordovaSQLite,
       console.log(Data.all());
       angular.forEach(Data.all(),function(value,key){
         $cordovaSQLite.execute(db, exampleData,[value.word, value.translate, value.img, value.audio]).then(function(res){
-          console.log(res);       
+          console.log(res);      
         }, function (err) {
             console.error(err);
         });
@@ -29,10 +29,12 @@ app.controller("DemoController", function($scope, $ionicHistory, $cordovaSQLite,
 
     $scope.selectAll = function(){
       var query = "SELECT id, word, translate, img, audio FROM diction";
+    
       var a=[];
       $cordovaSQLite.execute(db,query,[]).then(function(res){
         for(var i = 0; i < res.rows.length; i++){
-          a[i] = res.rows[i];
+          a[i] = res.rows.item(i);
+          console.log(res.rows.item(i));
         }   
       }, function (err) {
         console.error(err);

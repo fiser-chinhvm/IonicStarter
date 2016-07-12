@@ -25,7 +25,8 @@ app.run(function($ionicPlatform, $cordovaSQLite) {
     }
 
     if (window.cordova) {
-      db = $cordovaSQLite.openDB({ name: "my.db" }); //device
+      db = $cordovaSQLite.openDB({ name: "my.db", location:1 });
+      // window.alert("device") //device
     }else{
       db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
     }
@@ -45,6 +46,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/detail.html',
     controller: 'DetailController'
   });
-
-   $urlRouterProvider.otherwise('/');
+   
+  $urlRouterProvider.otherwise('/');
 });
