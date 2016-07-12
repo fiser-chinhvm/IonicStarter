@@ -1,0 +1,9 @@
+<ion-view>
+	 <ion-content>
+	<ion-list>
+        <ion-item href="#/detail/{{value.word}}" ng-repeat="(id,value) in lists">     
+            <span>{{value.word}}</span> : <span>{{value.translate}}</span>
+        </ion-item>
+    </ion-list>
+    </ion-content>
+</ion-view>
